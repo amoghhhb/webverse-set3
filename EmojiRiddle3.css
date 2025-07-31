@@ -1,0 +1,522 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+/* CSS Custom Properties */
+:root {
+  --emoji-primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --emoji-secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --emoji-success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --emoji-warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  --emoji-accent-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  --emoji-error-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+
+  --emoji-bg-primary: #0a0e27;
+  --emoji-bg-secondary: #1a1f3a;
+  --emoji-bg-tertiary: #2d3561;
+  --emoji-bg-card: rgba(255, 255, 255, 0.05);
+  --emoji-bg-card-hover: rgba(255, 255, 255, 0.08);
+  --emoji-bg-input: rgba(255, 255, 255, 0.03);
+
+  --emoji-text-primary: #ffffff;
+  --emoji-text-secondary: #b8c5d6;
+  --emoji-text-muted: #8892b0;
+  --emoji-text-accent: #64ffda;
+
+  --emoji-border-primary: rgba(255, 255, 255, 0.1);
+  --emoji-border-secondary: rgba(255, 255, 255, 0.05);
+  --emoji-border-focus: rgba(100, 255, 218, 0.5);
+
+  --emoji-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --emoji-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --emoji-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --emoji-shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.25);
+
+  --emoji-radius-sm: 8px;
+  --emoji-radius-md: 12px;
+  --emoji-radius-lg: 16px;
+  --emoji-radius-xl: 20px;
+
+  --emoji-transition-fast: 0.15s ease-out;
+  --emoji-transition-normal: 0.3s ease-out;
+  --emoji-transition-slow: 0.5s ease-out;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--emoji-bg-primary);
+  color: var(--emoji-text-primary);
+  line-height: 1.6;
+}
+
+/* Main Container */
+.emoji-puzzle-arena {
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0.25rem;
+  width: 100%;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #2d3561 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.emoji-puzzle-arena::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Content Card */
+.emoji-puzzle-panel {
+  background: var(--emoji-bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--emoji-border-primary);
+  border-radius: var(--emoji-radius-lg);
+  padding: 1rem 1.5rem;
+  box-shadow: var(--emoji-shadow-xl);
+  width: 100%;
+  max-width: 500px; /* DECREASED WIDTH from 600px */
+  position: relative;
+  z-index: 1;
+  animation: emojiSlideUp 0.8s ease-out;
+  margin: 0;
+  max-height: calc(100vh - 0.5rem);
+  overflow-y: auto;
+}
+
+@keyframes emojiSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.emoji-puzzle-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.emoji-main-title {
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  background: var(--emoji-primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.emoji-badge-icon {
+  font-size: 1.2rem;
+}
+
+/* Symbol Problem Section */
+.emoji-riddle-section {
+  margin-bottom: 1rem;
+}
+
+.emoji-riddle-workspace {
+  background: var(--emoji-bg-input);
+  border: 1px solid var(--emoji-border-primary);
+  border-radius: var(--emoji-radius-md);
+  padding: 1rem;
+  text-align: center;
+}
+
+.emoji-workspace-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: var(--emoji-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.emoji-workspace-icon {
+  font-size: 1.5rem;
+}
+
+.emoji-sequence-display {
+  margin: 0.75rem 0;
+  padding: 1rem;
+  background: var(--emoji-bg-card);
+  border-radius: var(--emoji-radius-md);
+  border: 1px solid var(--emoji-border-secondary);
+}
+
+.emoji-sequence-text {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0;
+  background: var(--emoji-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.emoji-riddle-instructions {
+  margin-top: 1rem;
+}
+
+.emoji-instruction-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: var(--emoji-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.emoji-instruction-text {
+  font-size: 0.85rem;
+  color: var(--emoji-text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Word Section - Adjusted for multiple inputs */
+.emoji-answer-section {
+  margin-bottom: 1rem;
+}
+
+.emoji-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem; /* Added gap between inputs */
+  flex-wrap: nowrap;
+  margin-bottom: 1rem;
+}
+
+.emoji-input-container.multiple-inputs {
+  flex-direction: row; /* Ensure side-by-side for multiple inputs */
+}
+
+.emoji-input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.emoji-answer-field {
+  width: 150px; /* Adjusted width for two inputs */
+  max-width: 90%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background: var(--emoji-bg-input);
+  border: 2px solid var(--emoji-border-primary);
+  border-radius: var(--emoji-radius-md);
+  color: var(--emoji-text-primary);
+  text-align: center;
+  outline: none;
+  transition: all var(--emoji-transition-normal);
+  font-family: inherit;
+}
+
+.emoji-character-counter {
+  font-size: 0.7rem;
+  color: var(--emoji-text-muted);
+  font-weight: 500;
+}
+
+.emoji-answer-field:focus {
+  border-color: var(--emoji-border-focus);
+  background: var(--emoji-bg-card-hover);
+  box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.1);
+}
+
+.emoji-answer-field:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.emoji-answer-field::placeholder {
+  color: var(--emoji-text-muted);
+  font-weight: 400;
+}
+
+
+/* STYLES FOR BUTTONS LAYOUT */
+.emoji-action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem; /* Increased gap slightly for wider buttons */
+  margin-bottom: 1.5rem; /* Space below the button group */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  align-items: stretch; /* Ensure children stretch to fill container height if needed, though individual heights will override */
+}
+
+.emoji-form-container,
+.emoji-navigation-area {
+    text-align: unset;
+    width: auto;
+    margin-bottom: 0;
+    display: flex; /* Make these also flex containers to properly center their single button child */
+    justify-content: center;
+}
+
+
+.emoji-submit-button,
+.emoji-next-button {
+  width: 100%; /* Ensure they can fill their container up to max-width */
+  padding: 0.875rem 1.5rem; /* Consistent vertical padding */
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--emoji-radius-md);
+  cursor: pointer;
+  transition: all var(--emoji-transition-normal);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: var(--emoji-shadow-md);
+  position: relative;
+  overflow: hidden;
+
+  /* MODIFIED: Explicit fixed height for consistent sizing */
+  height: 3.5rem; /* Example fixed height. Adjust as needed. */
+  line-height: calc(3.5rem - (0.875rem * 2)); /* Height - (top padding + bottom padding) to vertically center text */
+  display: flex; /* Use flex to center content vertically */
+  align-items: center; /* Vertically center content */
+  justify-content: center; /* Horizontally center content */
+}
+
+.emoji-submit-button {
+  max-width: 200px;
+  color: var(--emoji-bg-primary);
+  background: var(--emoji-success-gradient);
+  border: none;
+}
+
+.emoji-submit-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.emoji-submit-button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.emoji-submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--emoji-shadow-lg);
+  filter: brightness(1.1);
+}
+
+.emoji-submit-button:disabled {
+  background: var(--emoji-text-muted);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: none;
+}
+
+/* Result Section */
+.emoji-result-area {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Status Indicator */
+.emoji-status-message {
+  padding: 0.75rem 1rem;
+  border-radius: var(--emoji-radius-md);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--emoji-bg-input);
+  border: 1px solid var(--emoji-border-secondary);
+}
+
+.emoji-success-message {
+  background: rgba(79, 172, 254, 0.1);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  color: #4facfe;
+  animation: emojiSuccessPulse 0.6s ease-in-out;
+}
+
+.emoji-error-message {
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  color: #ff6b6b;
+  animation: emojiErrorShake 0.6s ease-in-out;
+}
+
+@keyframes emojiSuccessPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes emojiErrorShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-8px);
+  }
+  75% {
+    transform: translateX(8px);
+  }
+}
+
+.emoji-timeout-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+/* Progress Section */
+.emoji-attempts-area {
+  margin-bottom: 1rem;
+}
+
+.emoji-attempts-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.emoji-attempts-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--emoji-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.emoji-attempts-indicators {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.emoji-attempt-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--emoji-border-primary);
+  transition: all var(--emoji-transition-normal);
+}
+
+.emoji-attempt-dot.used {
+  background: var(--emoji-error-gradient);
+  box-shadow: 0 0 8px rgba(255, 107, 107, 0.3);
+}
+
+/* Advance Section */
+.emoji-next-button {
+  max-width: 250px; /* Keep the desired width for the next button */
+  color: var(--emoji-bg-primary);
+  background: var(--emoji-secondary-gradient);
+  border: none;
+}
+
+.emoji-next-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--emoji-shadow-lg);
+  filter: brightness(1.1);
+}
+
+.emoji-next-button:disabled {
+  background: var(--emoji-text-muted);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: none;
+}
+
+.emoji-next-arrow {
+  font-size: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .emoji-puzzle-arena {
+    padding: 1rem 0.5rem;
+  }
+
+  .emoji-puzzle-panel {
+    padding: 2rem 1.5rem;
+    max-width: 100%;
+    margin: 0 0.5rem;
+  }
+
+  .emoji-main-title {
+    font-size: 1.75rem;
+  }
+
+  .emoji-sequence-text {
+    font-size: 2rem;
+  }
+
+  .emoji-input-container {
+    flex-direction: column;
+    gap: 1rem; /* Adjust gap for column layout */
+  }
+
+  .emoji-answer-field {
+    width: 200px; /* Make inputs wider in column layout */
+  }
+
+  /* Responsive adjustments for buttons */
+  .emoji-action-buttons {
+    flex-direction: column; /* Stack buttons vertically on smaller screens */
+    gap: 1rem; /* Adjust gap when stacked */
+  }
+
+  .emoji-submit-button,
+  .emoji-next-button {
+    max-width: 250px; /* Ensure both buttons are same width when stacked */
+    margin: 0 auto; /* Center individual buttons when stacked */
+    height: 3.5rem; /* Apply fixed height consistently on smaller screens too */
+    line-height: calc(3.5rem - (0.875rem * 2));
+  }
+}
